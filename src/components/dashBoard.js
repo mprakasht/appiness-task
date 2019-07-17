@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import { Employee } from './employee';
 
 class DashBord extends Component {
-	constructor(props) {
-		super(props);
-	}
 
 	render() {
 		console.log(this.props.login.userStatus);
@@ -16,9 +13,9 @@ class DashBord extends Component {
 				<div style={{ padding: 50 }}>
 					<h3> Employee List</h3>
 					<ul className="collection">
-						{this.props.employee.user.map((item, index) => {
+						{this.props.employee.user.map((item) => {
 							return (
-								<li key={index} className="collection-item">
+								<li key={item.id} className="collection-item">
 									<Employee emp={item} />
 								</li>
 							);

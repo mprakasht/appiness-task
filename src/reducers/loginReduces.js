@@ -5,18 +5,35 @@ const user = {
 	password: 'hruday123'
 };
 const initState = {
-	userStatus: false
+	userStatus: false,
+	message: ''
 };
 const loginReducers = (state = initState, actions) => {
 	switch (actions.type) {
 		case LOGIN_SUCCESS:
 			if (
-				actions.payload.username == user.username &&
-				actions.payload.password == user.password
+				actions.payload.username === user.username &&
+				actions.payload.password === user.password
 			) {
-				return { ...state, userStatus: true };
+				return {
+					...state,
+					userStatus: true,
+					message: 'Successfully logged in'
+				};
+			}else if (!(actions.payload.username.length > 0 && actions.payload.password.length > 0)){
+				return {
+					...state,
+					userStatus: false,
+					message: 'Username and password is required '
+				};
 			}
-			return state;
+			else{
+				return {
+					...state,
+					userStatus: false,
+					message: 'Invalid credentials'
+				};
+			}
 
 		default:
 			return state;

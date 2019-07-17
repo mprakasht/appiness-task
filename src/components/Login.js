@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { getLoginAction } from '../actions/loginActions';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
@@ -9,8 +8,11 @@ class Login extends Component {
 		super(props);
 
 		this.state = {
-			username: '',
-			password: ''
+			user: {
+				username: '',
+				password: ''
+			},
+			message: ''
 		};
 	}
 
@@ -32,8 +34,6 @@ class Login extends Component {
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.userLogin.login.userStatus) {
 			nextProps.history.push('/Dashboard');
-		} else {
-			nextProps.history.push('/');
 		}
 	}
 
@@ -61,6 +61,7 @@ class Login extends Component {
 									border: '1px solid #EEE'
 								}}
 							>
+							<p style={{color:'red'}}> {this.props.userLogin.login.message}</p>
 								<form className="col s12" onSubmit={this.handleSubmit}>
 									<div className="row">
 										<div className="col s12" />
